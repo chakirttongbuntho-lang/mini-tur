@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chiang Mai Cozy One Day Trip</title>
+    <!-- Google Fonts: Prompt & Playfair Display -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Prompt:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- FontAwesome สำหรับไอคอน -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #FBF9F5;
+            --card-bg: #FFFFFF;
+            --text-main: #4A403A;
+            --text-muted: #8C7B70;
+            --accent-color: #D4A373;
+            --accent-hover: #C59363;
+            --border-color: #EFECE6;
+            --radius: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Header Style */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 300;
+        }
+
+        /* Timeline / Trip List Style */
+        .timeline {
+            position: relative;
+            margin-bottom: 60px;
+        }
+
+        .trip-card {
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: 0 10px 30px rgba(74, 64, 58, 0.04);
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .trip-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(74, 64, 58, 0.08);
+        }
+
+        @media (min-width: 768px) {
+            .trip-card {
+                flex-direction: row;
+            }
+        }
+
+        .trip-img-wrapper {
+            flex: 1;
+            min-height: 220px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .trip-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .trip-card:hover .trip-img-wrapper img {
+            transform: scale(1.03);
+        }
+
+        .badge-step {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: var(--text-main);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            backdrop-filter: blur(4px);
+        }
+
+        .trip-content {
+            flex: 1.2;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .trip-info h3 {
+            font-size: 1.25rem;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .trip-type {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            margin-bottom: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .trip-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        /* Cozy Minimalist Button */
+        .btn-route {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: #F4EFEB;
+            color: var(--text-main);
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            align-self: flex-start;
+            border: 1px solid transparent;
+        }
+
+        .btn-route:hover {
+            background-color: var(--accent-color);
+            color: #FFFFFF;
+        }
+
+        /* Map Section (Bottom) */
+        .map-section {
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(74, 64, 58, 0.04);
+            margin-top: 40px;
+        }
+
+        .map-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .map-header h2 {
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+
+        .btn-explore {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--accent-color);
+            color: #FFFFFF;
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-explore:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .map-container {
+            width: 100%;
+            height: 450px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Footer Info */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Chiang Mai Cozy Trip</h1>
+            <p>สัมผัสเสน่ห์ธรรมชาติ ขุนเขา และสายหมอกในหนึ่งวันแบบสบายๆ สไตล์มินิมอล</p>
+        </header>
+
+        <!-- Timeline / Trip List -->
+        <div class="timeline">
+            {% for loc in locations %}
+            <div class="trip-card">
+                <div class="trip-img-wrapper">
+                    <span class="badge-step">จุดที่ {{ loop.index }}</span>
+                    <img src="{{ loc.image_url }}" alt="{{ loc.name }}">
+                </div>
+                <div class="trip-content">
+                    <div class="trip-info">
+                        <span class="trip-type"><i class="fa-solid fa-location-dot"></i> {{ loc.type }}</span>
+                        <h3>{{ loc.name }}</h3>
+                        <p class="trip-desc">{{ loc.description }}</p>
+                    </div>
+                    <!-- ปุ่มข้อมูลเส้นทางรายสถานที่ -->
+                    <a href="{{ loc.google_maps }}" target="_blank" class="btn-route">
+                        <i class="fa-solid fa-arrow-turn-up"></i> ข้อมูลเส้นทาง
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Folium Map Section (Bottom) -->
+        <div class="map-section">
+            <div class="map-header">
+                <h2><i class="fa-solid fa-map-location-dot" style="color: var(--accent-color);"></i> แผนที่เส้นทางท่องเที่ยวทั้งหมด</h2>
+                <!-- ปุ่ม Explore Route หลัก -->
+                <a href="{{ master_maps }}" target="_blank" class="btn-explore">
+                    <i class="fa-solid fa-compass"></i> Explore Route
+                </a>
+            </div>
+            <div class="map-container">
+                {{ map_html | safe }}
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2026 Chiang Mai Cozy Trip Planner. Designed with Cozy Minimalist Style.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
